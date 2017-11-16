@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request, redirect
 from caesar import rotate_string
 import cgi
 app = Flask(__name__)
