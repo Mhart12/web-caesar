@@ -1,77 +1,45 @@
-def alphabet_position(character):
+def alphabet_position(yertext):
 
-    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    #yertext = yertext.lower()
+    alphaindex = 0
 
-    lower = character.lower()
+    for i in range(len(alphabet)):
 
-    return alphabet.index(lower)
+        if yertext == alphabet[i]:
+            return i % 26
+        if yertext not in alphabet:
+            return None
+        # print(i, alphabet[i])
 
+def rotate_character(char,rot):
+    originalPosition = 0
+    newPosition = 0
+    newChar = ""
+    alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
+    if char not in alphabet:
 
-def rotate_string_13(text):
+        return char
 
+    originalPosition = alphabet_position(char)
+    newPosition = (originalPosition + rot) % 26
 
+    newChar = alphabet[newPosition]
 
-    rotated = ''
+    if char.isupper(): #preserve case
 
-    alphabet = 'abcdefghijklmnopqrstuvwxyz'
-
-
-
-    for char in text:
-
-        rotated_idx = (alphabet_position(char) + 13) % 26
-
-        if char.isupper():
-
-            rotated = rotated + alphabet[rotated_idx].upper()
-
-        else:
-
-            rotated = rotated + alphabet[rotated_idx]
-
-
-
-    return rotated
-
-
-
-def rotate_character(char, rot):
-
-    alphabet = 'abcdefghijklmnopqrstuvwxyz'
-
-    rotated_idx = (alphabet_position(char) + rot) % 26
-
-
-
-    if char.isupper():
-
-        return alphabet[rotated_idx].upper()
+        return newChar.upper()
 
     else:
 
-        return alphabet[rotated_idx]
+        return newChar
 
+def rotate_string(yourInput, rotate):
 
+    caesarOutput = ""
+    for i in yourInput:
 
-def rotate_string(text, rot):
+        caesarOutput = caesarOutput + rotate_character(i,rotate)
 
-
-
-    rotated = ''
-
-
-
-    for char in text:
-
-        if (char.isalpha()):
-
-            rotated = rotated + rotate_character(char, rot)
-
-        else:
-
-            rotated = rotated + char
-
-
-
-    return rotated
+    return caesarOutput
